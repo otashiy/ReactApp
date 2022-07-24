@@ -1,18 +1,31 @@
 import { useContext } from "react";
 import { PostsContext } from "../../contexts/posts";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./posts.scss";
+import Filter from "../../components/filter/filter";
 
 const Posts = () => {
 
-const { posts } = useContext(PostsContext);
+const { posts, setPosts } = useContext(PostsContext);
 
+
+const handleDeleteBtn = () => {
+const deletePostIndex = posts.findIndex(post => post.id ===  post.id)
+const prevPost = posts.splice(0, deletePostIndex);
+const nextPost = posts.splice(deletePostIndex, +1)
+
+setPosts([
+...prevPost,
+...nextPost
+])
+}
 
 
     return (
 <>
 <h1>Posts</h1>
-<Link to={"/news"}>News</Link>
+<Link className="posts__news-link" to={"/news"}>News</Link>
+<Filter />
 <ul>
 {posts.map(post => {
     return (
@@ -25,7 +38,7 @@ const { posts } = useContext(PostsContext);
         <br></br>
         <span className="posts__share">{post.share}</span>
     </div>
-        <button className="posts__btn" type="button">Delete</button>
+        <button onClick={handleDeleteBtn} className="posts__btn" type="button">Delete</button>
     </li>
     )
 })}

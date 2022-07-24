@@ -1,0 +1,25 @@
+.login__input {
+  display: block;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.login__input:focus {
+  outline-color: #ccc;
+}
+
+.login__btn {
+  display: block;
+  width: 182px;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login__btn:active {
+  border: none;
+}
+/*# sourceMappingURL=login.css.map */

@@ -1,6 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import { LoginContext } from "../../contexts/login";
 import { useNavigate } from "react-router-dom";
+import "./login.scss";
 
 const Login = () => {
 
@@ -30,9 +31,9 @@ setError("Check your password!")
 
     return (
         <form onSubmit={handleLoginSubmit}>
-            <input ref={textRef} type="text" placeholder="Login" aria-label="text" />
-            <input ref={passwordRef} type="password" placeholder="Password" aria-label="password" />
-            <button type="submit">Submit</button>
+            <input className="login__input" ref={textRef} type="text" placeholder="Login" aria-label="text" />
+            <input className="login__input" ref={passwordRef} type="password" placeholder="Password" aria-label="password" />
+            <button className="login__btn" type="submit">Submit</button>
             <p>{error}</p>
         </form>
     )

@@ -24,6 +24,7 @@ const { news } = useContext(NewsContext);
         <strong>
             {neew.likes}
         </strong>
+        <br />
         <b>
             {neew.type}
         </b>

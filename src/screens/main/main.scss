@@ -1,0 +1,15 @@
+.main__link {
+display: inline-block;
+text-decoration: none;
+font-size: 24px;
+border: 1px solid #000;
+border-radius: 5px;
+padding: 8px 10px;
+color: #000;
+}
+
+.main__link:active {
+border: none;
+background-color: aqua;
+}
+
