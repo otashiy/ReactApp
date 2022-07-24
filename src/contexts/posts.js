@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import App from "../App";
+import { createContext, useEffect, useState } from "react";
+
 import { getRndInteger } from "../utils";
 
-export const PostsContext = useContext();
+export const PostsContext = createContext();
 
 
-const PostsProvider = (props) => {
+const PostsProvider = ({children}) => {
 
 
     const [ posts, setPosts ] = useState();
@@ -23,7 +23,7 @@ const PostsProvider = (props) => {
     setPosts(data.map(post => {
         return {
             ...post,
-            date: new Date(`${getRndInteger(2001, 2023)}-${getRndInteger(1, 12)}-${getRndInteger(1, 28)}`).toString,
+            date: new Date(`${getRndInteger(2001, 2023)}-${getRndInteger(1, 12)}-${getRndInteger(1, 28)}`).toString(),
             share: getRndInteger(0, 100)
           }
     }))
@@ -31,14 +31,17 @@ const PostsProvider = (props) => {
     .finally(setLoading(false))
     }, []);
 
-    if(loading) {
-        return <p>Loading...</p>
-    }
+   if (!posts) {
+    return null;
+   }
+   else if (loading) {
+    return <p>Loading...</p>
+   }
+    
 
 
     return (
 <PostsContext.Provider value={{posts, setPosts}}>
-{...props}
 {children}
 </PostsContext.Provider>
     )

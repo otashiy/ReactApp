@@ -1,5 +1,5 @@
-import { useContext, useRef } from "react"
-import { LoginContext } from "../../context/login";
+import { useContext, useRef, useState } from "react"
+import { LoginContext } from "../../contexts/login";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -8,19 +8,23 @@ const textRef = useRef();
 const passwordRef = useRef();
 
 const { setToken } = useContext(LoginContext);
+const [ error, setError ] = useState();
 
 const navigate = useNavigate();
 
 const handleLoginSubmit = (evt) => {
 evt.preventDefault();
 
-const textValue = textRef.current.value;
-const passwordValue = passwordRef.current.value;
+let textValue = textRef.current.value;
+let passwordValue = passwordRef.current.value;
 
-if (textValue && passwordValue) {
+if (textValue === "Administrator" && passwordValue === "12345") {
 setToken(true);
 navigate("/posts");
-};
+}
+else if (!textValue || passwordValue) {
+setError("Check your password!")
+}
 
 }
 
@@ -29,6 +33,7 @@ navigate("/posts");
             <input ref={textRef} type="text" placeholder="Login" aria-label="text" />
             <input ref={passwordRef} type="password" placeholder="Password" aria-label="password" />
             <button type="submit">Submit</button>
+            <p>{error}</p>
         </form>
     )
 }
